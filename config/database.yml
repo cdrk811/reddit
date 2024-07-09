@@ -1,0 +1,21 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: qwer4321
+  host: db
+
+development:
+  <<: *default
+  database: reddit_development
+
+test:
+  <<: *default
+  database: reddit_test
+
+production:
+  <<: *default
+  database: reddit_production
+  username: reddit
+  password: <%= ENV["PHOENIX_DATABASE_PASSWORD"] %>

@@ -22,16 +22,25 @@ module App
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.exceptions_app = self.routes
 
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = 'Beijing'
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.i18n.default_locale = :en
+    config.i18n.available_locales = [:en, 'zh-CN']
+
+    config.autoload_paths += %W[#{config.root}/db/seeds]
+
+    # fix Psych::DisallowedClass error
+    config.active_record.use_yaml_unsafe_load = true
   end
 end
